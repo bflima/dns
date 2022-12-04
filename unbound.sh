@@ -1,15 +1,22 @@
 #!/usr/bin/env bash
 
+clear
+
 # Variáveis
 IP=$(ip a | grep inet | grep -v inet6 | grep -v "127.0.0.*" | awk '{print $2}' | cut -d "/" -f 1)
 ARQ=$(find /etc/ -iname unbound.conf)
 MASK=$(ip a | grep inet | grep -v inet6 | grep -v "127.0.0.*" | awk '{print $2}' | cut -d "/" -f 2)
 TOTAL_INTERFACES=$(nmcli device show | grep -ic device)
 
-# Testar se existe mais de uma interface de rede cadastrada sai do script
-[ "$TOTAL_INTERFACES" -eq 2 ] || { clear ; echo "Mais de uma interface de rede cadastrada, favor alterar manualmente o arquivo" ; exit 1 ; }
+# Verificar se unbound está instalado
+which unbound || yum install unbound -y
 
+# Testar se existe mais de uma interface de rede cadastrada sai do script
+[ "$TOTAL_INTERFACES" -eq 2 ] || { clear ; echo "Mais de uma interface de rede cadastrada, favor alterar manualmente o script" ; exit 1 ; }
+
+# Realizar copia do arquivo
 cp  "$ARQ"{,.bkp}
+
 cat > "$ARQ" << EOF
 server:
        	directory: "/etc/unbound"
