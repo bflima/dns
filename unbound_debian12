@@ -111,3 +111,5 @@ auth-zone:
         for-upstream: yes
 #        zonefile: "root.zone"
         url: http://www.internic.net/domain/root.zone
+# Stop error
+# sysctl -w net.core.rmem_max=1048576
