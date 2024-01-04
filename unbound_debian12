@@ -1,5 +1,6 @@
 # Baixar
 # curl -o /var/lib/unbound/root.hints https://www.internic.net/domain/named.cache
+# https://gist.github.com/MatthewVance/5051bf45cfed6e4a2a2ed9bb014bcd72
 
 server:
 # If no logfile is specified, syslog is used
@@ -91,6 +92,7 @@ edns-buffer-size: 1232
         so-sndbuf: 4m
 
         cache-max-ttl: 86400
+        cache-min-ttl: 300
         outgoing-num-tcp: 1024
         outgoing-range: 8192
         num-queries-per-thread: 4096
