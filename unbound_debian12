@@ -56,7 +56,7 @@ edns-buffer-size: 1232
 # prefetch: yes
 
 # Ensure kernel buffer is large enough to not lose messages in traffic spikes
-so-rcvbuf: 1m
+# so-rcvbuf: 1
 
 #[ privacidade ]
         hide-identity: yes
@@ -83,6 +83,13 @@ so-rcvbuf: 1m
         rrset-cache-slabs: 4
         infra-cache-slabs: 4
         rrset-roundrobin: yes
+
+        rrset-cache-size: 100m
+        msg-cache-size: 50m
+        outgoing-range: 950
+        so-rcvbuf: 4m
+        so-sndbuf: 4m
+
         cache-max-ttl: 86400
         outgoing-num-tcp: 1024
         outgoing-range: 8192
